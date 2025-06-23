@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sección de Flores</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(to bottom right, #f4fefe, #d6f2f2);
+      margin: 0;
+      padding: 0;
+      color: #2e3d3d;
+      transition: background 0.4s, color 0.4s;
+    }
+    header {
+      background-color: #5aa3a3;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav {
+      background-color: #3d7c7c;
+      text-align: center;
+      padding: 10px;
+      position: sticky;
+      top: 76px;
+      z-index: 999;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    main {
+      padding: 30px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    section {
+      margin-bottom: 50px;
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    h1, h2, h3 {
+      color: #317171;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #cfeeee;
+    }
+    .btn-top, .btn-print, .btn-tema {
+      position: fixed;
+      right: 20px;
+      background-color: #5aa3a3;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .btn-top {
+      bottom: 20px;
+    }
+    .btn-print {
+      bottom: 70px;
+    }
+    .btn-tema {
+      bottom: 120px;
+    }
+    .btn-top:hover, .btn-print:hover, .btn-tema:hover {
+      background-color: #3d7c7c;
+    }
+    .flower-img {
+      width: 100%;
+      max-width: 250px;
+      border-radius: 8px;
+      margin: 10px 0;
+    }
+    .gallery-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    .gallery-img {
+      width: 180px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .gallery-img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+      z-index: 10;
+    }
+    .season-tag {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .winter { background-color: #c6e2ff; color: #003366; }
+    .spring { background-color: #e6ffe6; color: #006600; }
+    .summer { background-color: #fff0f0; color: #cc0000; }
+    .autumn { background-color: #fff2cc; color: #996600; }
+
+    .oscuro {
+      background: #1e1e1e;
+      color: #f0f0f0;
+    }
+    .oscuro header, .oscuro nav {
+      background-color: #333;
+      color: white;
+    }
+    .oscuro nav a {
+      color: #c9f7ff;
+    }
+    .oscuro table, .oscuro th, .oscuro td {
+      border-color: #666;
+    }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.flower-img, .gallery-img {
+  animation: fadeIn 1s ease-out forwards;
+}
+  </style>
+</head>
+    <ul class="nav-links">
+        <li><a href="Inicio.html" class="active">Inicio</a></li>
+        <li><a href="Lenguaje_Flores.html">Lenguaje de las Flores</a></li>
+        <li><a href="Flores_Medicinales.html">Plantas Medicinales</a></li>
+        <li><a href="Formulario.html">Formulario</a></li>
+    </ul>
+<body>
+  <header>
+    <h1>Enciclopedia de Flores</h1>
+  </header>
+<audio controls>
+    <source src="Audio/FloresIn.mp3" type="audio/mp3">
+  </audio>
+  <nav>
+    <a href="#fichas">Fichas</a>
+    <a href="#estaciones">Estaciones</a>
+    <a href="#cuidados">Cuidados</a>
+    <a href="#galeria">Galería</a>
+  </nav>
+
+  <!-- Buscador -->
+  <input type="text" id="buscador" placeholder="Buscar flor..." onkeyup="buscarFlor()" style="margin: 20px auto; display: block; padding: 10px; width: 80%; max-width: 500px;">
+
+  <main>
+    <section id="fichas">
+      <h2>1. Fichas de Flores</h2>
+
+      <!-- Flores originales (rutas actualizadas a .jpeg) -->
+      <h3>Camelia (Camellia japonica) <span class="season-tag winter">Invierno</span></h3>
+      <img src="Imagenes/Camelia.jpeg" alt="Imagen de Camelia" class="flower-img" />
+      <table>
+        <tr><th>Familia</th><td>Theaceae</td></tr>
+        <tr><th>Origen</th><td>Japón, China, Corea</td></tr>
+        <tr><th>Floración</th><td>Finales de invierno – principios de primavera</td></tr>
+        <tr><th>Luz</th><td>Sombra parcial</td></tr>
+        <tr><th>Suelo</th><td>Ácido, bien drenado, rico en materia orgánica</td></tr>
+        <tr><th>Riego</th><td>Moderado</td></tr>
+        <tr><th>Temperatura</th><td>7–15 °C</td></tr>
+        <tr><th>Cuidados</th><td>Aplicar mantillo, eliminar flores marchitas</td></tr>
+      </table>
+
+      <h3>Pensamiento (Viola × wittrockiana) <span class="season-tag winter">Invierno</span></h3>
+      <img src="Imagenes/pensamiento.jpeg" alt="Imagen de Pensamiento" class="flower-img" />
+      <table>
+        <tr><th>Familia</th><td>Violaceae</td></tr>
+        <tr><th>Origen</th><td>Europa</td></tr>
+        <tr><th>Floración</th><td>Otoño – invierno hasta primavera</td></tr>
+        <tr><th>Luz</th><td>Sol o semisombra</td></tr>
+        <tr><th>Suelo</th><td>Rico en humus</td></tr>
+        <tr><th>Riego</th><td>Moderado</td></tr>
+        <tr><th>Temperatura</th><td>Tolera heladas</td></tr>
+        <tr><th>Cuidados</th><td>Retirar flores marchitas</td></tr>
+      </table>
+
+      <h3>Ciclamen (Cyclamen persicum) <span class="season-tag winter">Invierno</span></h3>
+      <img src="Imagenes/ciclamen.jpeg" alt="Imagen de Ciclamen" class="flower-img" />
+      <table>
+        <tr><th>Familia</th><td>Primulaceae</td></tr>
+        <tr><th>Origen</th><td>Mediterráneo</td></tr>
+        <tr><th>Floración</th><td>Otoño – invierno</td></tr>
+        <tr><th>Luz</th><td>Luz indirecta</td></tr>
+        <tr><th>Suelo</th><td>Bien drenado</td></tr>
+        <tr><th>Riego</th><td>Desde abajo, evitar mojar hojas</td></tr>
+        <tr><th>Temperatura</th><td>10–15 °C</td></tr>
+        <tr><th>Cuidados</th><td>Eliminar hojas secas</td></tr>
+      </table>
+
+      <h3>Helleborus (Helleborus niger) <span class="season-tag winter">Invierno</span></h3>
+      <img src="Imagenes/helleborus.jpeg" alt="Imagen de Helleborus" class="flower-img" />
+      <table>
+        <tr><th>Familia</th><td>Ranunculaceae</td></tr>
+        <tr><th>Origen</th><td>Europa Central</td></tr>
+        <tr><th>Floración</th><td>Invierno</td></tr>
+        <tr><th>Luz</th><td>Sombra parcial</td></tr>
+        <tr><th>Suelo</th><td>Neutro o alcalino</td></tr>
+        <tr><th>Riego</th><td>Moderado</td></tr>
+        <tr><th>Temperatura</th><td>Muy resistente al frío</td></tr>
+        <tr><th>Cuidados</th><td>Eliminar hojas viejas</td></tr>
+      </table>
+
+      <h3>Prímula (Primula vulgaris) <span class="season-tag winter">Fin Invierno</span></h3>
+      <img src="Imagenes/primula.jpeg" alt="Imagen de Prímula" class="flower-img" />
+      <table>
+        <tr><th>Familia</th><td>Primulaceae</td></tr>
+        <tr><th>Origen</th><td>Europa</td></tr>
+        <tr><th>Floración</th><td>Finales de invierno – primavera</td></tr>
+        <tr><th>Luz</th><td>Luz difusa</td></tr>
+        <tr><th>Suelo</th><td>Fértil y húmedo</td></tr>
+        <tr><th>Riego</th><td>Moderado</td></tr>
+        <tr><th>Temperatura</th><td>10–16 °C</td></tr>
+        <tr><th>Cuidados</th><td>Evitar calor excesivo</td></tr>
+      </table>
+
+      <!-- NUEVAS PLANTAS (1 por estación faltante) -->
+      <h3>Narciso (Narcissus poeticus) <span class="season-tag spring">Primavera</span></h3>
+      <img src="Imagenes/narciso.jpeg" alt="Imagen de Narciso" class="flower-img" />
+      <table>
+        <tr><th>Familia</th><td>Amaryllidaceae</td></tr>
+        <tr><th>Origen</th><td>Europa Mediterránea</td></tr>
+        <tr><th>Floración</th><td>Principios de primavera</td></tr>
+        <tr><th>Luz</th><td>Pleno sol a sombra parcial</td></tr>
+        <tr><th>Suelo</th><td>Húmedo pero bien drenado</td></tr>
+        <tr><th>Riego</th><td>Moderado durante crecimiento</td></tr>
+        <tr><th>Temperatura</th><td>5–20 °C</td></tr>
+        <tr><th>Cuidados</th><td>No cortar hojas hasta que se marchiten</td></tr>
+      </table>
+
+      <h3>Lavanda (Lavandula angustifolia) <span class="season-tag summer">Verano</span></h3>
+      <img src="Imagenes/lavanda.jpeg" alt="Imagen de Lavanda" class="flower-img" />
+      <table>
+        <tr><th>Familia</th><td>Lamiaceae</td></tr>
+        <tr><th>Origen</th><td>Mediterráneo</td></tr>
+        <tr><th>Floración</th><td>Verano (junio-agosto)</td></tr>
+        <tr><th>Luz</th><td>Pleno sol (6+ horas diarias)</td></tr>
+        <tr><th>Suelo</th><td>Seco, arenoso, pH alcalino</td></tr>
+        <tr><th>Riego</th><td>Escaso (resistente a sequía)</td></tr>
+        <tr><th>Temperatura</th><td>15–30 °C</td></tr>
+        <tr><th>Cuidados</th><td>Poda anual después de floración</td></tr>
+      </table>
+
+      <h3>Áster (Aster novi-belgii) <span class="season-tag autumn">Otoño</span></h3>
+      <img src="Imagenes/aster.jpeg" alt="Imagen de Áster" class="flower-img" />
+      <table>
+        <tr><th>Familia</th><td>Asteraceae</td></tr>
+        <tr><th>Origen</th><td>Norteamérica</td></tr>
+        <tr><th>Floración</th><td>Otoño (septiembre-noviembre)</td></tr>
+        <tr><th>Luz</th><td>Pleno sol a sombra ligera</td></tr>
+        <tr><th>Suelo</th><td>Fértil, bien drenado</td></tr>
+        <tr><th>Riego</th><td>Regular (no encharcar)</td></tr>
+        <tr><th>Temperatura</th><td>10–25 °C</td></tr>
+        <tr><th>Cuidados</th><td>Dividir matas cada 2-3 años</td></tr>
+      </table>
+    </section>
+
+    <section id="estaciones">
+      <h2>2. Tipos de flores por estación</h2>
+      <table>
+        <tr><th>Estación</th><th>Flores</th><th>Notas</th></tr>
+        <tr><td>Invierno</td><td>Camelia, Pensamiento, Ciclamen, Helleborus</td><td>Resistentes a temperaturas bajo cero</td></tr>
+        <tr><td>Fin invierno/Primavera</td><td>Prímula, Narciso</td><td>Transición climática</td></tr>
+        <tr><td>Verano</td><td>Lavanda</td><td>Resistentes al calor</td></tr>
+        <tr><td>Otoño</td><td>Áster</td><td>Florecen con días más cortos</td></tr>
+      </table>
+    </section>
+
+        <section id="cuidados">
+      <h2>3. Cuidados básicos</h2>
+      <table>
+        <tr><th>Flor</th><th>Riego</th><th>Luz</th><th>Suelo</th><th>Temperatura</th><th>Cuidados</th></tr>
+        <tr><td>Camelia</td><td>Moderado</td><td>Sombra parcial</td><td>Ácido</td><td>7–15 °C</td><td>Proteger del frío extremo</td></tr>
+        <tr><td>Pensamiento</td><td>2–3 días</td><td>Sol/sombra</td><td>Humus</td><td>Resiste heladas</td><td>Retirar flores marchitas</td></tr>
+        <tr><td>Narciso</td><td>Moderado</td><td>Sol parcial</td><td>Húmedo</td><td>5–20 °C</td><td>No cortar follaje verde</td></tr>
+        <tr><td>Lavanda</td><td>Escaso</td><td>Pleno sol</td><td>Arenoso</td><td>15–30 °C</td><td>Poda post-floración</td></tr>
+        <tr><td>Áster</td><td>Regular</td><td>Sol</td><td>Fértil</td><td>10–25 °C</td><td>Dividir matas</td></tr>
+      </table>
+    </section>
+
+    <section id="galeria">
+      <h2>4. Galería de Imágenes</h2>
+      <div class="gallery-container">
+        <!-- Flores originales -->
+        <img src="Imagenes/Camelia2.jpeg" alt="Camelia" class="gallery-img" />
+        <img src="Imagenes/pensamiento2.jpeg" alt="Pensamiento" class="gallery-img" />
+        <img src="Imagenes/ciclamen2.jpeg" alt="Ciclamen" class="gallery-img" />
+        <img src="Imagenes/helleborus2.jpeg" alt="Helleborus" class="gallery-img" />
+        <img src="Imagenes/primula2.jpeg" alt="Prímula" class="gallery-img" />
+        <!-- Nuevas flores -->
+        <img src="Imagenes/narciso2.jpeg" alt="Narciso" class="gallery-img" />
+        <img src="Imagenes/lavanda2.jpeg" alt="Lavanda" class="gallery-img" />
+        <img src="Imagenes/aster2.jpeg" alt="Áster" class="gallery-img" />
+      </div>
+      <!-- Extra que pediste: -->
+      <div class="extra-gif">
+        <a href="https://es.bloggif.com/" title="Edición de fotos">
+          <img src="https://data.bloggif.com/distant/user/store/8/b/9/d/f4831aa7079477a9eb43158b0028d9b8.gif" alt="Montaje creado Bloggif" width="281" height="281" />
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <button class="btn-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆️ Arriba</button>
+  <button class="btn-print" onclick="window.print()">🖨️ Imprimir</button>
+  <button class="btn-tema" onclick="cambiarTema()">🌙 Tema</button>
+
+  <script>
+    function cambiarTema() {
+      document.body.classList.toggle("oscuro");
+    }
+
+    function buscarFlor() {
+      const input = document.getElementById("buscador").value.toLowerCase();
+      const seccion = document.getElementById("fichas");
+      const fichas = seccion.getElementsByTagName("h3");
+
+      for (let i = 0; i < fichas.length; i++) {
+        const texto = fichas[i].textContent.toLowerCase();
+        const img = fichas[i].nextElementSibling;
+        const tabla = img.nextElementSibling;
+
+        if (texto.includes(input)) {
+          fichas[i].style.display = "";
+          img.style.display = "";
+          tabla.style.display = "";
+        } else {
+          fichas[i].style.display = "none";
+          img.style.display = "none";
+          tabla.style.display = "none";
+        }
+      }
+    }
+  </script>
+</body>
+</html>

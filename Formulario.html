@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario</title>
+  
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Lato', sans-serif;
+      background-color: #f9f3dd;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Menú de navegación */
+    .nav-links {
+      list-style: none;
+      padding: 20px 40px;
+      margin: 0;
+      display: flex;
+      gap: 25px;
+      background-color: white;
+      font-size: 20px;
+      color:#FFFF00;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: #4e342e;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #8d6e63;
+    }
+
+    .franja-amarilla {
+      background-color: #fff59d;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .franja-amarilla h1 {
+      margin: 0;
+      font-size: 50px;
+      color: #4e342e;
+    }
+
+    .contenedor-formulario {
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    .contenedor-flex {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 40px 20px;
+      flex-wrap: wrap;
+    }
+
+    .gif-lado {
+      width: 400px;
+      height: auto;
+    }
+
+    iframe {
+      width: 95vw;
+      max-width: 700px;
+      height: 1000px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    }
+
+    /* Sección de datos curiosos */
+    .datos-curiosos {
+      background-color: #fffde7;
+      text-align: center;
+      padding-bottom: 40px;
+    }
+
+    .curiosidades-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 30px 20px;
+    }
+
+    .dato-card {
+      background-color: #fff8dc;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      width: 250px;
+      transition: transform 0.3s ease;
+    }
+
+    .dato-card:hover {
+      transform: scale(1.05);
+    }
+
+    .dato-card h3 {
+      font-size: 35px;
+      margin: 0 0 10px 0;
+    }
+
+    .dato-card p {
+      font-size: 19px;
+      color: #4e342e;
+    }
+
+    .contenedor-formulario h2 {
+      font-size: 32px;
+      color: #4e342e;
+      margin-bottom: 10px;
+    }
+
+    .contenedor-formulario p {
+      font-size: 20px;
+      color: #5d4037;
+      margin-top: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Menú -->
+  <ul class="nav-links">
+    <li><a href="Inicio.html" class="active">Inicio</a></li>
+    <li><a href="Lenguaje_Flores.html">Lenguaje de las Flores</a></li>
+    <li><a href="Enciclopedia_Flores.html">Enciclopedia de Flores</a></li>
+    <li><a href="Plantas_Medicinales.html">Flores Medicinales</a></li>
+  </ul>
+
+  <!-- Sección de datos curiosos con franja amarilla -->
+  <section class="datos-curiosos">
+    <div class="franja-amarilla">
+      <h1>🌼 Conoce más sobre las flores 🌼</h1>
+    </div>
+
+    <div class="curiosidades-container">
+      <div class="dato-card">
+        <h3>🌹</h3>
+        <p>Las rosas existen desde hace más de 35 millones de años.</p>
+      </div>
+      <div class="dato-card">
+        <h3>🌻</h3>
+        <p>Los girasoles siguen el sol durante el día. A eso se le llama heliotropismo.</p>
+      </div>
+      <div class="dato-card">
+        <h3>🌸</h3>
+        <p>El cerezo japonés florece solo por 1-2 semanas cada año y simboliza la belleza efímera.</p>
+      </div>
+      <div class="dato-card">
+        <h3>🌼</h3>
+        <p>Algunas flores se cierran por la noche para proteger su polen. Eso se llama nictinastia.</p>
+      </div>
+      <div class="dato-card">
+        <h3>🌷</h3>
+        <p>En el siglo XVII, los tulipanes eran más valiosos que el oro en los Países Bajos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Encuesta -->
+  <div class="contenedor-formulario">
+    <h2>Formulario</h2>
+    <p>¡Esperamos tus respuestas para descubrir juntos/as cuánto sabemos de flores!</p>
+
+    <div class="contenedor-flex">
+      <img src="Gif/Margarita.gif" alt="GIF Izquierdo" class="gif-lado">
+
+      <iframe 
+        src="https://docs.google.com/forms/d/e/1FAIpQLSfJZGrfTj09wihjA6GF66M0LSj8bQoGxlZgYXFZ-iaXrQlcAQ/viewform?usp=header=true" 
+        frameborder="0" 
+        marginheight="0" 
+        marginwidth="0">
+        Cargando…
+      </iframe>
+
+      <img src="Gif/Margarita2.gif" alt="GIF Derecho" class="gif-lado">
+    </div>
+  </div>
+
+</body>
+</html>
