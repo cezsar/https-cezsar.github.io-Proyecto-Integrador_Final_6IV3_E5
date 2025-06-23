@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>🌿 Flores Medicinales</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: #e9fdf1;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #a8d5ba;
+      padding: 30px;
+      text-align: center;
+      border-bottom: 4px solid #81c784;
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3em;
+      color: #2e7d32;
+    }
+
+    header p {
+      font-size: 1.2em;
+    }
+
+    nav {
+      background-color: #d4eede;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #2e7d32;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #1b5e20;
+    }
+
+    section {
+      padding: 30px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .flor {
+      background-color: #dcf7e4;
+      border-radius: 16px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .flor h2 {
+      color: #388e3c;
+      margin-top: 0;
+    }
+
+    .foto {
+      margin-top: 10px;
+      height: 200px;
+      border: 2px dashed #81c784;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      font-style: italic;
+      background-color: #f0fff4;
+    }
+
+    .categoria {
+      background-color: #ffffff;
+      border-radius: 16px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 800px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.4s ease;
+      user-select: none;
+    }
+
+    .categoria:hover {
+      transform: scale(1.02);
+    }
+
+    .categoria.activa {
+      background-color: #d2f2df;
+    }
+
+    .contenido-categoria {
+      margin-top: 15px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease;
+    }
+
+    .categoria h3 {
+      color: #2e7d32;
+      margin: 0;
+      user-select: none;
+    }
+
+    .contenido-categoria ul {
+      margin: 10px 0 0 20px;
+      padding: 0;
+    }
+
+    .carrusel {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      margin: 30px auto;
+      overflow: hidden;
+    }
+
+    .recetas-container {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .tarjeta-receta {
+      min-width: 100%;
+      background-color: #dcf7e4;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-sizing: border-box;
+    }
+
+    .tarjeta-receta h3 {
+      margin-top: 0;
+      color: #2e7d32;
+    }
+
+    .tarjeta-receta p {
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .controles {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      width: 90%;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .boton-receta {
+      background-color: #a5d6a7;
+      color: #1b5e20;
+      border: none;
+      padding: 10px 16px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .boton-receta:hover {
+      background-color: #81c784;
+    }
+
+    .mariposa {
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/72/Butterfly_icon.svg');
+      background-size: cover;
+      animation: flotar linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes flotar {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-100px) rotate(45deg);
+      }
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div id="mariposas"></div>
+    <ul class="nav-links">
+        <li><a href="Inicio.html" class="active">Inicio</a></li>
+        <li><a href="Lenguaje_Flores.html">Lenguaje de las Flores</a></li>
+        <li><a href="Enciclopedia_Flores.html">Enciclopedia de Flores</a></li>
+        <li><a href="Formulario.html">Formulario</a></li>
+    </ul>
+  <header>
+    <h1>🌸 Flores Medicinales</h1>
+    <p>Conoce sus usos curativos y secretos ancestrales</p>
+  </header>
+
+  <nav>
+    <a href="#todas">Todas las flores</a>
+    <a href="#categorias">Tipos de uso</a>
+    <a href="#recetas">Recetas Naturales</a>
+  </nav>
+
+  <section id="todas">
+    <h2>Todas las flores medicinales 🌼</h2>
+    <div class="flor">
+      <h2>🌸 Manzanilla</h2>
+      <p><strong>Origen:</strong> Europa y Asia.</p>
+      <p><strong>Usos:</strong> Relajante, digestiva, antiinflamatoria.</p>
+      <p><strong>Uso:</strong> Infusión o baños.</p>
+     <div class="fotos/img1.JPG">Imagen de Caléndula</div>
+    </div>
+    </div>
+    <div class="flor">
+      <h2>🌺 Caléndula</h2>
+      <p><strong>Origen:</strong> Mediterráneo.</p>
+      <p><strong>Usos:</strong> Cicatrizante, alivia irritaciones de piel.</p>
+      <p><strong>Uso:</strong> Pomadas e infusiones.</p>
+    </div>
+    <div class="flor">
+      <h2>🌹 Rosa</h2>
+      <p><strong>Origen:</strong> Medio Oriente.</p>
+      <p><strong>Usos:</strong> Aromaterapia, digestión, antiinflamatoria.</p>
+      <p><strong>Uso:</strong> Agua de rosas e infusión.</p>
+    </div>
+  </section>
+
+  <section id="categorias">
+    <h2>🌿 Tipos de Usos Medicinales</h2>
+    <div class="categoria">
+      <h3>🌙 Relajantes</h3>
+      <div class="contenido-categoria">
+        <ul>
+          <li>Manzanilla</li>
+          <li>Lavanda</li>
+          <li>Jazmín</li>
+        </ul>
+      </div>
+    </div>
+    <div class="categoria">
+      <h3>🍵 Digestivas</h3>
+      <div class="contenido-categoria">
+        <ul>
+          <li>Manzanilla</li>
+          <li>Diente de león</li>
+          <li>Rosa</li>
+          <li>Tilo</li>
+        </ul>
+      </div>
+    </div>
+    <div class="categoria">
+      <h3>🩹 Cicatrizantes</h3>
+      <div class="contenido-categoria">
+        <ul>
+          <li>Caléndula</li>
+          <li>Árnica</li>
+          <li>Manzanilla</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="recetas">
+    <h2>🌼 Recetas Naturales</h2>
+    <div class="carrusel">
+      <div class="recetas-container" id="recetaSlider">
+        <div class="tarjeta-receta">
+          <h3>🍵 Té de Manzanilla & Lavanda</h3>
+          <p><strong>Ingredientes:</strong> 1 cda de manzanilla + ½ cda de lavanda + 1 taza de agua caliente.</p>
+          <p><strong>Preparación:</strong> Hierve el agua, añade las flores y deja reposar 7 minutos. Cuela y bebe antes de dormir.</p>
+        </div>
+        <div class="tarjeta-receta">
+          <h3>🌺 Infusión de Hibisco Refrescante</h3>
+          <p><strong>Ingredientes:</strong> 1 cda de flores secas de hibisco + 2 rodajas de limón + miel al gusto.</p>
+          <p><strong>Preparación:</strong> Hierve agua, añade los ingredientes y enfría. Ideal para días calurosos.</p>
+        </div>
+        <div class="tarjeta-receta">
+          <h3>🌸 Baño de Caléndula para la piel</h3>
+          <p><strong>Ingredientes:</strong> 2 cdas de flores de caléndula + 1 litro de agua caliente.</p>
+          <p><strong>Preparación:</strong> Infusiona las flores y agrégalas al agua de baño. Relaja y sana la piel.</p>
+        </div>
+        <div class="tarjeta-receta">
+          <h3>🌿 Compresa de Lavanda para dolores</h3>
+          <p><strong>Ingredientes:</strong> 1 cda de flores de lavanda + ½ litro de agua caliente + paño limpio.</p>
+          <p><strong>Preparación:</strong> Haz la infusión, empapa el paño y aplica sobre cuello o abdomen.</p>
+        </div>
+        <div class="tarjeta-receta">
+          <h3>🫖 Tisana digestiva con Tilo y Rosa</h3>
+          <p><strong>Ingredientes:</strong> 1 cda de flores de tilo + 1 cdita de pétalos de rosa.</p>
+          <p><strong>Preparación:</strong> Vierte agua caliente sobre las flores. Reposa 10 min. Ideal después de comer.</p>
+        </div>
+        <div class="tarjeta-receta">
+          <h3>💧 Tónico facial de Rosa</h3>
+          <p><strong>Ingredientes:</strong> 1 taza de pétalos de rosa + ½ taza de agua de rosas.</p>
+          <p><strong>Preparación:</strong> Mezcla y deja reposar. Aplica con algodón sobre el rostro.</p>
+        </div>
+      </div>
+      <div class="controles">
+        <button class="boton-receta" onclick="moverReceta(-1)">⬅ Anterior</button>
+        <button class="boton-receta" onclick="moverReceta(1)">Siguiente ➡</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('.categoria').forEach(categoria => {
+      const h3 = categoria.querySelector('h3');
+      const contenido = categoria.querySelector('.contenido-categoria');
+      contenido.style.maxHeight = '0';
+      contenido.style.overflow = 'hidden';
+      contenido.style.transition = 'max-height 0.4s ease-out';
+
+      h3.style.cursor = 'pointer';
+      h3.addEventListener('click', () => {
+        if (categoria.classList.contains('activa')) {
+          contenido.style.maxHeight = '0';
+          categoria.classList.remove('activa');
+        } else {
+          document.querySelectorAll('.categoria').forEach(c => {
+            c.classList.remove('activa');
+            c.querySelector('.contenido-categoria').style.maxHeight = '0';
+          });
+          contenido.style.maxHeight = contenido.scrollHeight + 'px';
+          categoria.classList.add('activa');
+        }
+      });
+    });
+
+    let slideIndex = 0;
+    const slider = document.getElementById('recetaSlider');
+    const totalSlides = slider?.children.length || 0;
+
+    function moverReceta(direccion) {
+      slideIndex = (slideIndex + direccion + totalSlides) % totalSlides;
+      slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+    }
+
+    // Mariposas flotantes
+    const mariposas = document.getElementById('mariposas');
+    for (let i = 0; i < 10; i++) {
+      const m = document.createElement('div');
+      m.className = 'mariposa';
+      m.style.top = Math.random() * 100 + 'vh';
+      m.style.left = Math.random() * 100 + 'vw';
+      m.style.animationDuration = (6 + Math.random() * 6) + 's';
+      mariposas.appendChild(m);
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,415 @@
+/* --- ESTILOS GENERALES --- */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* --- ESTILOS DEL MENÚ DE NAVEGACIÓN --- */
+.main-nav {
+    background-color: #ffffff;
+    padding: 0 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    box-sizing: border-box;
+}
+
+.nav-logo a {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #2c5d3d;
+    text-decoration: none;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li {
+    margin-left: 35px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 10px 5px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: #6a994e;
+    transition: width 0.3s ease-in-out;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #6a994e;
+}
+
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1001; /* Para que esté por encima de los enlaces */
+}
+
+.bar {
+    width: 28px;
+    height: 3px;
+    background-color: #333;
+    margin: 4px 0;
+    transition: all 0.3s ease-in-out;
+    border-radius: 2px;
+}
+
+.hamburger-menu.open .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-7px, 6px);
+}
+
+.hamburger-menu.open .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.open .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-7px, -6px);
+}
+
+
+/* --- ESTILOS DEL CONTENIDO PRINCIPAL --- */
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fff;
+    /* Mueve el contenido hacia abajo para que no quede oculto por el menú fijo */
+    margin-top: 100px; 
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5em;
+    text-align: center;
+    color: #2c5d3d;
+    margin-bottom: 50px;
+    position: relative;
+    letter-spacing: 1px;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 120px;
+    height: 5px;
+    background-color: #6a994e;
+    margin: 25px auto 0;
+    border-radius: 3px;
+}
+
+.subsection-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2em;
+    color: #386641;
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+
+/* --- FICHAS DE FLORES --- */
+.flower-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 35px;
+    margin-bottom: 60px;
+    perspective: 1000px;
+}
+
+.flower-card {
+    width: 100%;
+    height: 350px;
+    background-color: transparent;
+    border: none;
+}
+
+.flower-card:hover .flower-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flower-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 18px;
+}
+
+.flower-card-front, .flower-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.flower-card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.flower-card-front .flower-name {
+    position: absolute;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    width: 100%;
+    padding: 15px 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7em;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.flower-card-back {
+    background-color: #8ab048;
+    color: white;
+    padding: 25px;
+    box-sizing: border-box;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.flower-card-back h3 {
+    font-family: 'Playfair Display', serif;
+    margin-top: 0;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.flower-card-back p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.flower-card-back .additional-info {
+    font-style: italic;
+    font-size: 0.95em;
+    color: #e0f7fa;
+}
+
+/* --- ACORDEÓN DE ESTACIONES --- */
+.accordion-container {
+    width: 90%;
+    margin: 40px auto;
+}
+
+.accordion-item {
+    margin-bottom: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.accordion-button {
+    background-color: #a7c957;
+    color: #2c5d3d;
+    cursor: pointer;
+    padding: 20px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: background-color 0.3s ease;
+    font-size: 1.3em;
+    font-family: 'Playfair Display', serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.accordion-button:hover, .accordion-button.active {
+    background-color: #8ab048;
+}
+
+.accordion-icon {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    margin-right: 15px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.accordion-button::after {
+    content: '+';
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #fff;
+    transition: transform 0.3s ease-in-out;
+}
+
+.accordion-button.active::after {
+    content: "−";
+    transform: rotate(180deg);
+}
+
+.panel {
+    padding: 0 20px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+}
+
+.accordion-button.active + .panel {
+    padding: 20px;
+}
+
+.panel ul {
+    list-style-type: '🌿 ';
+    padding-left: 25px;
+    margin: 0;
+}
+
+.panel li {
+    padding: 8px 0;
+    font-size: 1.05em;
+    color: #555;
+}
+
+/* --- GUÍA DE CUIDADOS BÁSICOS --- */
+.care-guide-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.care-card {
+    background: #fff;
+    border-left: 8px solid #6a994e;
+    padding: 30px;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.care-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.care-card h3 {
+    font-family: 'Playfair Display', serif;
+    color: #386641;
+    font-size: 1.7em;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.care-card p {
+    line-height: 1.8;
+    font-size: 1.05em;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+.care-card .additional-tip {
+    font-style: italic;
+    color: #777;
+    font-size: 0.95em;
+    border-left: 3px solid #a7c957;
+    padding-left: 10px;
+}
+
+/* --- MEDIA QUERY PARA PANTALLAS PEQUEÑAS (RESPONSIVE) --- */
+@media (max-width: 992px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        background-color: #ffffff;
+        width: 100%;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links a {
+        padding: 20px;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .nav-links a::after {
+        display: none; /* Oculta la línea animada en modo móvil */
+    }
+
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .section-container {
+        padding: 15px;
+        margin-top: 90px;
+    }
+
+    .section-title {
+        font-size: 2.5em;
+    }
+    
+    .subsection-title {
+        font-size: 1.8em;
+    }
+}

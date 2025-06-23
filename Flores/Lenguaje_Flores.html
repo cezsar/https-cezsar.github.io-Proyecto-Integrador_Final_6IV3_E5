@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>El Lenguaje de las Flores</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: #f0f4ff;
+      color: #3e2a4d;
+      overflow-x: hidden;
+    }
+    header {
+      background: #ffe4ec;
+      padding: 3rem 1rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      color: #c2185b;
+      margin-bottom: 0.5rem;
+      animation: fadeInDown 1.2s ease-in-out;
+    }
+    header p {
+      font-size: 1.3rem;
+      color: #6a1b9a;
+      margin: 0;
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+    .marquee {
+      width: 100%;
+      overflow: hidden;
+      background: #fff8e1;
+      color: #880e4f;
+      padding: 0.8rem;
+      font-weight: bold;
+    }
+
+    .marquee p {
+      display: inline-block;
+      animation: scrollText 20s linear infinite;
+      white-space: nowrap;
+    }
+    @keyframes scrollText {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .intro {
+      max-width: 850px;
+      margin: 2rem auto;
+      font-size: 1.2rem;
+      text-align: center;
+      color: #4a0072;
+      background-color: #fff0f5;
+      padding: 1.5rem;
+      border-radius: 20px;
+      border: 2px dashed #f48fb1;
+      animation: fadeInUp 1s ease-in-out;
+      white-space: pre-line;
+    }
+    .search, .emotion-selector {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .search input, .emotion-selector select {
+      padding: 0.6rem 1rem;
+      border-radius: 25px;
+      border: 1px solid #f48fb1;
+      font-size: 1rem;
+      background: #fce4ec;
+      transition: 0.3s;
+    }
+    .grid {
+      padding: 0 2rem 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: #fff8e1;
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+      border: 2px solid #f8bbd0;
+      animation: fadeInUp 0.7s ease-in-out;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+    }
+    .card::before {
+      content: "💮";
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 1.8rem;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .card h2 {
+      color: #ad1457;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    .card p {
+      color: #6a1b9a;
+      font-size: 0.95rem;
+      margin: 0;
+      /* Limit preview text lines */
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .hidden { display: none; }
+    .petal {
+      position: fixed;
+      top: -50px;
+      font-size: 1.5rem;
+      opacity: 0.6;
+      animation: fall 10s linear;
+      pointer-events: none;
+      user-select: none;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-50px) rotate(0deg); }
+      100% { transform: translateY(110vh) rotate(360deg); }
+    }
+    /* Popup */
+    #infoPopup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: #fff8f0;
+      padding: 2rem;
+      border: 2px solid #f48fb1;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      z-index: 9999;
+      max-width: 420px;
+      max-height: 70vh;
+      overflow-y: auto;
+      text-align: center;
+      font-size: 1rem;
+      color: #6a1b9a;
+      transition: transform 0.3s ease;
+      pointer-events: none;
+    }
+    #infoPopup.visible {
+      transform: translate(-50%, -50%) scale(1);
+      pointer-events: auto;
+    }
+    #infoPopup h3 {
+      margin-top: 0;
+      color: #ad1457;
+    }
+    #infoPopup button {
+      margin-top: 1.5rem;
+      padding: 0.5rem 1.2rem;
+      border: none;
+      border-radius: 20px;
+      background: #f48fb1;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #infoPopup button:hover {
+      background-color: #c2185b;
+    }
+  </style>
+</head>
+<body>
+    <ul class="nav-links">
+        <li><a href="Inicio.html" class="active">Inicio</a></li>
+        <li><a href="Enciclopedia_Flores.html">Enciclopedia de Flores</a></li>
+        <li><a href="Plantas_Medicinales.html">Flores Medicinales</a></li>
+        <li><a href="Formulario.html">Formulario</a></li>
+    </ul>
+  <header>
+    <h1>El Lenguaje de las Flores</h1>
+    <p>Descubre la magia y los sentimientos en cada flor</p>
+  </header>
+  <div class="marquee">
+    <p>💮 Las flores hablan con el alma 💮 Descubre su lenguaje y emoción 💮</p>
+  </div>
+  <div class="intro">
+En pétalos suaves, los secretos brotan,
+las flores susurran lo que el alma nota.
+Amor en una rosa, paz en lavanda,
+esperanza que en loto se levanta.
+Lee con el corazón su lenguaje sutil,
+cada flor es verso, perfume y perfil.
+
+ <audio controls>
+    <source src="Audio/LDLF.mp3" type="audio/mp3">
+  </audio>
+  </div>
+
+  <div class="search">
+    <input type="text" id="search" onkeyup="searchFlowers()" placeholder="Busca por nombre o significado: amor, gratitud, paz..." />
+  </div>
+  <div class="emotion-selector">
+    <h2>🌿 ¿Cómo te sientes hoy?</h2>
+    <select id="emotionSelector" onchange="filterByEmotion()">
+      <option value="">-- Elige una emoción --</option>
+      <option value="amor">Enamorad@</option>
+      <option value="alegría">Feliz</option>
+      <option value="nostalgia">Nostálgic@</option>
+      <option value="paz">En calma</option>
+      <option value="gratitud">Agradecid@</option>
+      <option value="pasión">Apasionad@</option>
+      <option value="motivación">Con energía</option>
+    </select>
+  </div>
+  <section class="grid" id="flowerGrid"></section>
+
+  <div id="infoPopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle" aria-describedby="popupText">
+    <h3 id="popupTitle"></h3>
+    <p id="popupText"></p>
+    <button onclick="closePopup()" aria-label="Cerrar ventana de información">Cerrar</button>
+  </div>
+
+  <script>
+    const flowerGrid = document.getElementById("flowerGrid");
+    const infoPopup = document.getElementById("infoPopup");
+    const popupTitle = document.getElementById("popupTitle");
+    const popupText = document.getElementById("popupText");
+
+    const flowers = [
+      {
+        name: "🌹 Rosa Roja",
+        tags: "amor pasión deseo",
+        description: "Simboliza amor apasionado, deseo intenso y compromiso profundo. Es la reina del romance, perfecta para declarar sentimientos intensos y sellar promesas de amor eterno."
+      },
+      {
+        name: "💛 Rosa Amarilla",
+        tags: "alegría gratitud amistad felicidad",
+        description: "Simboliza alegría contagiosa, gratitud y amistad sincera. La rosa amarilla es el sol hecho flor, irradiando optimismo y vínculos afectivos duraderos."
+      },
+      {
+        name: "🌷 Tulipán Rosa",
+        tags: "amor ternura sinceridad",
+        description: "Representa ternura inocente, afecto juvenil y sinceridad emocional. Es el susurro de un amor tímido, suave como un primer beso."
+      },
+      {
+        name: "🌻 Girasol",
+        tags: "alegría lealtad esperanza",
+        description: "Encarna la vitalidad, el entusiasmo y la lealtad inquebrantable. Gira con la luz como símbolo de esperanza, fidelidad y amor que nunca decae."
+      },
+      {
+        name: "💜 Lavanda",
+        tags: "paz tranquilidad espiritualidad serenidad",
+        description: "Flor de calma profunda, limpieza espiritual y serenidad. Su fragancia es medicina del alma, usada en rituales para purificar el espíritu y armonizar el entorno."
+      },
+      {
+        name: "🪷 Loto",
+        tags: "pureza espiritual superación calma paz",
+        description: "Símbolo sagrado de pureza, iluminación y renacimiento. El loto florece sobre el barro, enseñando que la belleza puede nacer de la adversidad."
+      },
+      {
+        name: "🌼 Margarita",
+        tags: "inocencia alegría juventud verdad",
+        description: "Evoca inocencia, juventud y alegría lúdica. Muy usada en juegos amorosos y símbolos de verdad sincera."
+      },
+      {
+        name: "🌺 Hibisco",
+        tags: "deseo belleza verano sensualidad pasión",
+        description: "Flor exótica del deseo, la belleza sensual y la energía veraniega. Expresa admiración ardiente y pasión vibrante."
+      },
+      {
+        name: "🌸 Peonía",
+        tags: "romance fortuna belleza felicidad amor",
+        description: "Refleja fortuna, romance feliz y belleza noble. Se asocia con amor próspero y celebraciones elegantes."
+      },
+      {
+        name: "🪻 Jacinto Azul",
+        tags: "confianza fidelidad serenidad amistad",
+        description: "Simboliza confianza, fidelidad y recuerdos duraderos. Aporta serenidad emocional y vínculos estables."
+      },
+      {
+        name: "🧡 Clavel Naranja",
+        tags: "motivación entusiasmo creatividad impulso energía",
+        description: "Despierta motivación, impulso creativo y alegría contagiosa. Es perfecta para comenzar proyectos nuevos."
+      },
+      {
+        name: "🌹 Camelia Rosa",
+        tags: "belleza admiración encanto elegancia amor",
+        description: "Transmite simpatía, belleza refinada y amor delicado. Es emblema de admiración sincera y elegancia."
+      },
+      {
+        name: "🌿 Alhelí",
+        tags: "esperanza fidelidad recuerdo amor eterno nostalgia",
+        description: "Evoca amor eterno, recuerdos nostálgicos y fidelidad en la distancia. Conserva la memoria de un vínculo fuerte."
+      },
+      {
+        name: "⚪ Lirio Blanco",
+        tags: "pureza elegancia espiritualidad honor paz",
+        description: "Significa pureza celestial, respeto profundo y elegancia serena. Ideal para ceremonias solemnes o espirituales."
+      },
+      {
+        name: "🎉 Gerbera",
+        tags: "celebración felicidad triunfo gratitud alegría",
+        description: "Flor de la felicidad, celebración y gratitud luminosa. Ideal para compartir entusiasmo y alegría."
+      },
+      {
+        name: "🌷 Fresia",
+        tags: "agradecimiento gratitud dulzura generosidad",
+        description: "Expresa dulzura, agradecimiento sincero y ternura gentil. Perfecta para gestos delicados de aprecio."
+      },
+      {
+        name: "🌹 Rosa Fucsia",
+        tags: "deseo aventura impulso pasión amor",
+        description: "Manifiesta impulso romántico, atracción intensa y emociones fuertes. Representa aventura sentimental y deseo vivo."
+      }
+    ];
+
+    function createCards() {
+      flowerGrid.innerHTML = "";
+      flowers.forEach((flower, index) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.setAttribute("data-tags", flower.tags);
+        card.innerHTML = `
+          <h2>${flower.name}</h2>
+          <p>${flower.description}</p>
+        `;
+        card.addEventListener("click", () => {
+          console.log("Tarjeta clickeada:", flower.name);
+          popupTitle.textContent = flower.name;
+          popupText.textContent = flower.description;
+          infoPopup.classList.add("visible");
+        });
+        flowerGrid.appendChild(card);
+      });
+    }
+
+    function closePopup() {
+      infoPopup.classList.remove("visible");
+    }
+
+    function searchFlowers() {
+      const query = document.getElementById('search').value.toLowerCase();
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        const tags = card.getAttribute('data-tags').toLowerCase();
+        const text = card.innerText.toLowerCase();
+        if (text.includes(query) || tags.includes(query)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    function filterByEmotion() {
+      const emotion = document.getElementById('emotionSelector').value.toLowerCase();
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        const tags = card.getAttribute('data-tags').toLowerCase();
+        if (!emotion || tags.includes(emotion)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Animación pétalos cayendo
+    function createPetals() {
+      for (let i = 0; i < 15; i++) {
+        const petal = document.createElement("div");
+        petal.classList.add("petal");
+        petal.textContent = "🌸";
+        petal.style.left = Math.random() * 100 + "vw";
+        petal.style.animationDuration = (5 + Math.random() * 5) + "s";
+        document.body.appendChild(petal);
+      }
+      setTimeout(() => {
+        document.querySelectorAll('.petal').forEach(p => p.remove());
+      }, 10000);
+    }
+
+    setInterval(createPetals, 8000);
+
+    window.onload = () => {
+      createCards();
+      createPetals();
+    };
+    
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
